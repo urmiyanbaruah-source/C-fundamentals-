@@ -126,6 +126,42 @@
 // 3. Array access: Print the values obtained through a[2], ptr[2], 2[ptr], and **arrayptr.
 // 4. Memory sizes: Print sizeof(a), sizeof(ptr), sizeof(arrayptr), sizeof(*arrayptr), and sizeof(**arrayptr).
 
+
+
+
+//Pointer of pointer and pointer of pointer of pointer. 
+
+
+// #include <stdio.h>
+
+// int main()
+// {
+//     int x = 50;
+//     int y = 100;
+
+//     int *p = &x;
+//     int **q = &p;
+//     int ***r = &q;
+
+//     printf("%d: %u, %u, %u\n", x, p, q, r);
+
+//     p = &y;
+//     printf("%d: %u, %u, %u\n", y, p, q, r);
+
+//     return 0;
+// }
+
+
+
+
+
+
+
+
+//Wild, Dangling, NULL, Const:
+
+
+// NULL
 // #include <stdio.h>
 
 // int main() {
@@ -139,6 +175,19 @@
 //     // printf("%d \n", *ptr3);
 //     return 0;
 // }
+
+
+
+
+
+
+
+
+
+//Understanding NULL guards and const int * (Can change the pointer address but not the integer in that Address)
+
+//Find the maximum number in an Array
+
 
 // #include <stdio.h>
 
@@ -180,6 +229,14 @@
 
 //     return 0;
 // }
+
+
+
+
+
+
+
+//Basically, Cmd + F of an array and updating that value. 
 
 // #include <stdio.h>
 
@@ -261,6 +318,15 @@
 //     return 0;
 // }
 
+
+
+
+
+
+
+//Learning to use end and start pointers to traverse through an array instead of [i].
+//Updating negarive values in an array to 0.
+
 // #include <stdio.h>
 
 // int sanitize_scores(int *arr, int size)
@@ -312,297 +378,3 @@
 // }
 
 
-//CHALLENGE 1
-
-// #include <stdio.h>
-
-// int is_palindrome(const int *arr, int size) {
-//     if(arr == NULL || size <= 0) {
-//         return -1;
-//     }
-
-//     const int *end = arr + size;
-//     const int *start_backward = end;
-
-//     for(const int *start_forward = arr; start_forward < end; start_forward++) {
-//         start_backward--;
-//         if(*start_forward != *start_backward) {
-//             return 0;
-//         }
-//     }
-//     return 1;
-// }
-
-// void palindrome_checker(int flagger) {
-//     if(flagger == 1) {
-//         printf("The array is a palindrome.\n");
-//     }
-//     else if (flagger == 0) {
-//         printf("The array is not a palindrome.\n");
-//     }
-//     else {
-//         printf("Invalid array or size.\n");
-//     }
-// }
-
-// int main() {
-//     //Test 1: Odd length Palindrome
-//     int odd_palindrome[3] = {10, 20, 10};
-//     int palindrome_tester = is_palindrome(odd_palindrome, 3);
-
-//     palindrome_checker(palindrome_tester);
-
-//     //Test 2: Even length palindrome/2-element palindrome
-//     int even_palindrome[2] = {10, 10};
-//     palindrome_tester = is_palindrome(even_palindrome, 2);
-
-//     palindrome_checker(palindrome_tester);
-
-//     //Test 3: Non-palindrome
-//     int non_palindrome[5] = {10, 20, 30, 40, 50};
-//     palindrome_tester = is_palindrome(non_palindrome, 5);
-
-//     palindrome_checker(palindrome_tester);
-
-//     //Test 4: 1-element array
-//     int one_element_palindrome[1] = {10};
-//     palindrome_tester = is_palindrome(one_element_palindrome, 1);
-
-//     palindrome_checker(palindrome_tester);
-    
-//     //Test 5: NULL test
-//     palindrome_tester = is_palindrome(NULL, 0);
-
-//     palindrome_checker(palindrome_tester);
-    
-//     return 0;
-// }
-
-//CHALLENGE 2
-
-// #include <stdio.h>
-
-// int copy_evens(const int *src, int *dest, int size) {
-//     if(src == NULL || dest == NULL || size <= 0) {
-//         return -1;
-//     }
-
-//     const int *end = src + size;
-//     int even_counter = 0;
-
-//     for(const int *start_left = src; start_left < end; start_left++) {
-//         if(*start_left % 2 == 0) {
-//             *dest = *start_left;
-
-//             even_counter++;
-//             dest++;
-//         }
-//     }
-
-//     return even_counter;
-// }
-
-// void even_array_printer(int even_elements, const int *even_array) {
-
-//     if (even_elements != -1)
-//     {
-//         printf("Even elements: ");
-//         for (int i = 0; i < even_elements; i++)
-//         {
-//             printf("%d ", even_array[i]);
-//         }
-//         printf("\n");
-//     }
-//     else {
-//         printf("Invalid input case.\n");
-//     }
-// }
-
-// int main() {
-//     //Test 1: Mixed array
-//     int mixed_arr[5] = {2, 4, -6, 0, -7};
-//     int even_array1[5];
-    
-//     int even_elements1 = copy_evens(mixed_arr, even_array1, 5);
-//     even_array_printer(even_elements1, even_array1);
-
-//     //Test 2: No-even_number array
-//     int no_even_array[5] = {3, 5, 7, 9, -7};
-//     int even_array2[5];
-
-//     int even_elements2 = copy_evens(no_even_array, even_array2, 5);
-//     even_array_printer(even_elements2, even_array2);
-
-//     //Test 3: Invalid case
-//     int even_array3[3];
-//     int even_elements3 = copy_evens(NULL, NULL, 0);
-
-//     even_array_printer(even_elements3, even_array3);
-
-//     return 0;
-// }
-
-// CHALLENGE 3
-
-// #include <stdio.h>
-
-// int find_min_max(const int *arr, int size, int *min_out, int *max_out) {
-//     if(arr == NULL || size <= 0 || min_out == NULL || max_out == NULL) {
-//         return -1;
-        
-//     }
-//     const int *end = arr + size;
-//     *min_out = *arr; 
-//     *max_out = *arr;
-
-//     for(const int *min_max_search = arr + 1; min_max_search < end; min_max_search++) {
-//         if(*min_out > *min_max_search) {
-//             *min_out = *min_max_search;
-//         }
-//         else if(*max_out < *min_max_search) {
-//             *max_out = *min_max_search;
-//         }
-//     }
-
-//     return 0;
-// } 
-
-// void min_max_printer(int flagger ,int min, int max) {
-//     if(flagger != -1) {
-//         printf("Smallest element in array: %d\n", min);
-//         printf("Largest element in array: %d\n", max);
-//     }
-//     else {
-//         printf("Invalid input.\n");
-//     }
-//     printf("\n");
-// }
-
-// int main() {
-//     //Test 1: Mixed array
-//     int mixed_arr[5] = {5, 6, -9, 0, 23};
-//     int min_element = 0, max_element = 0;
-    
-//     int min_max_success_checker = find_min_max(mixed_arr, 5, &min_element ,&max_element);
-//     min_max_printer(min_max_success_checker, min_element, max_element);
-
-//     //Test 2: All negative array
-//     int negative_arr[5] = {-5, -2, -11, -34, -3};
-
-//     min_max_success_checker = find_min_max(negative_arr, 5, &min_element, &max_element);
-//     min_max_printer(min_max_success_checker, min_element, max_element);
-
-//     //Test 3: 1-elment array
-//     int one_element_arr[1] = {4};
-
-//     min_max_success_checker = find_min_max(one_element_arr, 1, &min_element, &max_element);
-//     min_max_printer(min_max_success_checker, min_element, max_element);
-
-//     //Test 4: Testing for each false parameter.
-
-//     //First one
-//     min_max_success_checker = find_min_max(NULL, 5, &min_element, &max_element);
-//     min_max_printer(min_max_success_checker, min_element, max_element);
-
-//     //Second one
-//     min_max_success_checker = find_min_max(one_element_arr, 0, &min_element, &max_element);
-//     min_max_printer(min_max_success_checker, min_element, max_element);
-
-//     //Third one
-//     min_max_success_checker = find_min_max(one_element_arr, 1, NULL, &max_element);
-//     min_max_printer(min_max_success_checker, min_element, max_element);
-    
-//     //Last one
-//     min_max_success_checker = find_min_max(one_element_arr, 1, &min_element, NULL);
-//     min_max_printer(min_max_success_checker, min_element, max_element);
-
-//     return 0;
-// } 
-
-//FINAL BOSS
-
-#include <stdio.h>
-
-void swap_ints(int *a, int *b);
-
-int reverse_array(int *arr, int size);
-
-void before_after_array_printer(int *arr, int size);
-
-int main() {
-    //Test 1: Odd-length array
-    int odd_array[5] = {10, 22, 44, 37, 10};
-    before_after_array_printer(odd_array, 5);
-
-    //Test 2: Even-length array
-    int even_array[6] = {2, 9, 79, 0, -8, 3};
-    before_after_array_printer(even_array, 6);
-
-    //Test 3: One-element array
-    int one_array[1] = {5};
-    before_after_array_printer(one_array, 1);
-
-    //Test 4: Isolated invalid tests:
-    before_after_array_printer(NULL, 5);
-
-    before_after_array_printer(even_array, 0);
-    return 0;
-}
-
-void swap_ints(int *a, int *b) {
-    if(a == NULL || b == NULL) {
-        return;
-    }
-
-    int temp = *a;
-    *a = *b;
-    *b = temp;
-}
-
-int reverse_array(int *arr, int size) {
-    if(arr == NULL || size <= 0) {
-        return -1;
-    }
-
-    int *end = arr + size;
-    int *right = end;
-
-    for(int *left = arr; left < end; left++) {
-        right--;
-        if(left >= right) {
-            return 0;
-        }
-        if(*left != *right) {
-            swap_ints(left, right);
-        }
-        
-    }
-
-    return 0;  //This is apparantly needed? I think the for loop is guaranteed to encounter the return 0; case...do non-void funcs just need them at the end?
-}
-
-void before_after_array_printer(int *arr, int size) {
-    if (arr == NULL || size <= 0) {
-        printf("Invalid input.\n");
-        return;
-    }
-    printf("Array before: ");
-    int *end = arr + size;
-    for (int *b_printer = arr; b_printer < end; b_printer++)
-    {
-        printf("%d ", *b_printer);
-    }
-    printf("\n");
-    int valid_array_checker = reverse_array(arr, size);
-
-    if(valid_array_checker != -1) {
-        printf("Array after: ");
-        for(int *a_printer = arr; a_printer < end; a_printer++) {
-            printf("%d ", *a_printer);
-        }
-    }
-    else {
-        printf("Invalid input.\n");
-    }
-    printf("\n\n");
-}

@@ -8,6 +8,7 @@ bin/
 # macOS debug folders and Finder clutter
 *.dSYM/
 .DS_Store
+tempCodeRunnerFile*
 
 # Editor and IDE settings
 .vscode/
